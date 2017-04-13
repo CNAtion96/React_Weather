@@ -38,26 +38,31 @@ componentDidMount(){
 
   render() {
     const weather = this.state.weather.map(day=>{
+      let url = `http://openweathermap.org/img/w/${day.weather[0].icon}.png`
       return (<div className="col-md-2">
-          <h2>Hight: {day.temp.max}</h2>
+          <h2>High: {day.temp.max}</h2>
           <h2>Low: {day.temp.min}</h2>
           <h2>{day.weather[0].description}</h2>
+
+          <img src={url}/>
         </div>
       )
     })
     return (
-      <div className="App">
+      
+        <div className="App">
+          <div className="App-header">
+            <h1 className="col-md-6 col-md-offset-3">The Weather in {this.state.value} for the next week is:</h1>
+          </div>
 
-        <h3 className="col-md-6 col-md-offset-3">The Weather in {this.state.value} for the next week is:</h3>
-
-        <form onSubmit={this.getNewWeather.bind(this)} className="col-md-12 ">
-          <input className="form-control" onChange={this.changedInput.bind(this)} type="text" placeholder="Enter City" />
-          <button type="submit" className="btn btn-primary">Submit</button>
-        </form>
-
-          {weather}
-
-      </div>
+          <form onSubmit={this.getNewWeather.bind(this)} className="col-md-12 ">
+            <input className="form-control" onChange={this.changedInput.bind(this)} type="text" placeholder="Enter City" />
+            <button type="submit" className="btn btn-primary">Submit</button>
+          </form>
+          
+            {weather}
+        </div>
+      
     );
   }
 }
